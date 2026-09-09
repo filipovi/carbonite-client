@@ -1,0 +1,118 @@
+package layout
+
+templ Base(title string, isLogged bool) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ title }</title>
+			<script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+		</head>
+		<body>
+			@Header(isLogged)
+			{ children... }
+			if !isLogged {
+				@Footer(isLogged)
+			}
+		</body>
+	</html>
+}
+
+templ Footer(isLogged bool) {
+	<footer class="footer">
+		<div class="content has-text-centered">
+			<p>
+				<a href="">Contactez-nous</a>
+				| <a href="">À propos de Planet55</a>
+				| <a href="">FAQ</a>
+				| <a href="">Blog</a>
+				| <a href="">Mentions légales</a>
+				| <a href="">Politique de confidentialité</a>
+			</p>
+			<p>
+				<strong>Planet55</strong> by <a href="https://github.com/filipovi" target="_blank">Pascal Filipovicz</a>
+				(c) 2024
+			</p>
+		</div>
+	</footer>
+}
+
+templ Header(isLogged bool) {
+	<nav class="navbar is-link" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/">
+				<img src="/planet55.png"/>
+				&nbsp;<b>Planet 55</b>
+			</a>
+			<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
+		</div>
+		<div id="navbarBasicExample" class="navbar-menu">
+			<div class="navbar-start">
+				@navbarHomeItem(isLogged)
+				@navbarProfileItem(isLogged)
+				@navbarSearchItem(isLogged)
+			</div>
+			<div class="navbar-end">
+				@loginNavbarLink(isLogged)
+			</div>
+		</div>
+	</nav>
+}
+
+templ navbarHomeItem(isLogged bool) {
+	if isLogged {
+		<div class="navbar-item">
+			<a href="/" class="navbar-item">Home</a>
+		</div>
+	}
+}
+
+templ navbarProfileItem(isLogged bool) {
+	if isLogged {
+		<div class="navbar-item">
+			<a href="/profiles" class="navbar-item">Profiles </a>
+		</div>
+	}
+}
+
+templ navbarSearchItem(isLogged bool) {
+	if isLogged {
+		<div class="navbar-item">
+			<a href="/search" class="navbar-item">Search </a>
+		</div>
+	}
+}
+
+templ loginNavbarLink(isLogged bool) {
+	<div class="navbar-item">
+		<div class="buttons">
+			if isLogged {
+				<a class="button dark" href="/logout">Logout</a>
+			} else {
+				<a class="button is-light" href="/login">Login</a>
+			}
+		</div>
+	</div>
+}
+
+templ loginFieldHelper(v string, ph string, n string, t string, err string) {
+	if err != "" {
+		<input class="input is-danger" name={ n } type={ t } placeholder={ ph } value={ v }/>
+	} else {
+		<input class="input" type={ t } name={ n } placeholder={ ph } value={ v }/>
+	}
+}
+
+templ errorHelper(err string) {
+	if err != "" {
+		<p class="help is-danger">{ err }</p>
+	}
+}

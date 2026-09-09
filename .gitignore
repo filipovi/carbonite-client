@@ -1,0 +1,13 @@
+# Local variables #
+###################
+.env
+bin/
+
+# Repositories #
+################
+*_templ.go
+
+# Log #
+#######
+*.log
+tmp

@@ -1,0 +1,83 @@
+package pages
+
+import (
+	"carbonite/admin/templates/layout"
+	"carbonite/admin/internal/data"
+)
+
+templ Login(title string, b data.LoginBody, csrf string, err map[string]string) {
+	@layout.Base(title, false) {
+		<section class="hero is-large">
+			<div class="hero-body">
+				<div class="columns">
+					<div class="column is-2"></div>
+					<div class="column is-8">
+						<p class="title">Connectez-vous à Planet55</p>
+						<form action="/login" method="post" id="login-form">
+							@newFieldHelper(csrf, "", "_csrf", "hidden", "")
+							@LoginEmail(b.Email, err["email"])
+							@LoginPassword(err["password"])
+							<div class="field">
+								<div class="control">
+									<label class="checkbox">
+										<input type="checkbox"/>
+										se souvenir de moi
+									</label>
+								</div>
+							</div>
+							<div class="field">
+								<p class="control">
+									<button class="button is-success">
+										Se connecter
+									</button>
+								</p>
+							</div>
+						</form>
+					</div>
+					<div class="column is-2"></div>
+				</div>
+			</div>
+		</section>
+	}
+}
+
+templ newFieldHelper(v string, ph string, n string, t string, err string) {
+	if err != "" {
+		<input class="input is-danger" name={ n } type={ t } placeholder={ ph } value={ v }/>
+	} else {
+		<input class="input" type={ t } name={ n } placeholder={ ph } value={ v }/>
+	}
+}
+
+templ errorHelper(err string) {
+	if err != "" {
+		<p class="help is-danger">{ err }</p>
+	}
+}
+
+templ LoginEmail(email string, err string) {
+	<div class="field">
+		<p class="control has-icons-left has-icons-right">
+			@newFieldHelper(email, "Email", "email", "email", err)
+			<span class="icon is-small is-left">
+				<i class="fas fa-envelope"></i>
+			</span>
+			<span class="icon is-small is-right">
+				<i class="fas fa-check"></i>
+			</span>
+		</p>
+		@errorHelper(err)
+	</div>
+}
+
+templ LoginPassword(err string) {
+	<div class="field">
+		<p class="control has-icons-left">
+			@newFieldHelper("", "Mot de passe", "password", "password", err)
+			<span class="icon is-small is-left">
+				<i class="fas fa-lock"></i>
+			</span>
+		</p>
+		@errorHelper(err)
+	</div>
+}
