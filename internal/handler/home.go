@@ -21,5 +21,5 @@ func (h *HomeHandler) HandleHomepage(c echo.Context) error {
 	if logged {
 		c.Redirect(http.StatusSeeOther, "/welcome")
 	}
-	return Render(c, http.StatusOK, pages.Home("Homepage", logged, "Bienvenue chez Planet55"))
+	return Render(c, http.StatusOK, pages.Home("Homepage", logged, "Bienvenue"))
 }

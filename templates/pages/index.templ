@@ -12,8 +12,7 @@ templ Home(title string, isLogged bool, message string) {
 				<div class="columns">
 					<div class="column">
 						<div class="block has-text-justified">
-							Venez découvrir comment Planet55 simplifie la mise en relation entre donneurs d&#39;ordres et
-							prestataires qualifiés.
+            TEXT
 						</div>
 					</div>
 					<div class="column"></div>
@@ -21,17 +20,14 @@ templ Home(title string, isLogged bool, message string) {
 				<div class="columns">
 					<div class="column">
 						<div class="block has-text-justified">
-							Que vous
-							cherchiez à améliorer votre empreinte carbone, valoriser vos données ESG, vous engager dans une
-							certification, répondre aux exigences CSRD, former vos collaborateurs ou trouver l&#39;expert
-							idéal, Planet55 est votre partenaire de confiance.
+            DESCRIPTION
 						</div>
 					</div>
 					<div class="column"></div>
 				</div>
 				if !isLogged {
 					<p class="mg-u-6 subtitle">
-						<a href="/login">Connectez-vous</a> à Planet55
+						<a href="/login">Connectez-vous</a>
 					</p>
 				}
 			</div>

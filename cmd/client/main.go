@@ -72,6 +72,7 @@ func main() {
 
 	// 3. Construit le chemin absolu vers le fichier .env
 	envPath := filepath.Join(exPath, ".env")
+	log.Println(envPath)
 
 	// 4. Charge le fichier de manière déterministe
 	err = godotenv.Load(envPath)

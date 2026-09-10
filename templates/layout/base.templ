@@ -26,15 +26,15 @@ templ Footer(isLogged bool) {
 		<div class="content has-text-centered">
 			<p>
 				<a href="">Contactez-nous</a>
-				| <a href="">À propos de Planet55</a>
+				| <a href="">À propos</a>
 				| <a href="">FAQ</a>
 				| <a href="">Blog</a>
 				| <a href="">Mentions légales</a>
 				| <a href="">Politique de confidentialité</a>
 			</p>
 			<p>
-				<strong>Planet55</strong> by <a href="https://github.com/filipovi" target="_blank">Pascal Filipovicz</a>
-				(c) 2024
+				<strong>SITE</strong> by <a href="https://github.com/filipovi" target="_blank">Pascal Filipovicz</a>
+				(c) 2026
 			</p>
 		</div>
 	</footer>
@@ -44,21 +44,14 @@ templ Header(isLogged bool) {
 	<nav class="navbar is-link" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
 			<a class="navbar-item" href="/">
-				<img src="/planet55.png"/>
-				&nbsp;<b>Planet 55</b>
+				&nbsp;<b>SITE</b>
 			</a>
 			<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
 			</a>
 		</div>
 		<div id="navbarBasicExample" class="navbar-menu">
 			<div class="navbar-start">
 				@navbarHomeItem(isLogged)
-				@navbarProfileItem(isLogged)
-				@navbarSearchItem(isLogged)
 			</div>
 			<div class="navbar-end">
 				@loginNavbarLink(isLogged)
@@ -71,22 +64,6 @@ templ navbarHomeItem(isLogged bool) {
 	if isLogged {
 		<div class="navbar-item">
 			<a href="/" class="navbar-item">Home</a>
-		</div>
-	}
-}
-
-templ navbarProfileItem(isLogged bool) {
-	if isLogged {
-		<div class="navbar-item">
-			<a href="/profiles" class="navbar-item">Profiles </a>
-		</div>
-	}
-}
-
-templ navbarSearchItem(isLogged bool) {
-	if isLogged {
-		<div class="navbar-item">
-			<a href="/search" class="navbar-item">Search </a>
 		</div>
 	}
 }
