@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 	"sync"
 
@@ -60,7 +61,20 @@ const (
 )
 
 func main() {
-	err := godotenv.Load()
+	// 1. Récupère le chemin absolu du binaire en cours d'exécution
+	ex, err := os.Executable()
+	if err != nil {
+		log.Fatalf("Impossible de localiser le binaire : %v", err)
+	}
+
+	// 2. Extrait le dossier contenant le binaire (ex: /usr/local/bin)
+	exPath := filepath.Dir(ex)
+
+	// 3. Construit le chemin absolu vers le fichier .env
+	envPath := filepath.Join(exPath, ".env")
+
+	// 4. Charge le fichier de manière déterministe
+	err = godotenv.Load(envPath)
 	if err != nil {
 		log.Fatalf("Error loading .env file")
 	}
@@ -73,13 +87,13 @@ func main() {
 		os.Getenv("ENV"),
 	)
 	if err != nil {
-		log.Fatalf(err.Error())
+		log.Fatalf("Erreur de connexion à l'API: %v", err)
 	}
 
 	// Client Redis
 	cacher, err := redis.New(os.Getenv("REDIS_URL"))
 	if err != nil {
-		log.Fatalf(err.Error())
+		log.Fatalf("Erreur de connexion à REDIS: %v", err)
 	}
 
 	store, err := redisstore.NewRedisStore(context.Background(), cacher)
@@ -89,8 +103,8 @@ func main() {
 
 	store.KeyPrefix("session_")
 	store.Options(sessions.Options{
-		Path: "/",
-		// Domain: "planet55.fr",
+		Path:     "/",
+		Domain:   "frozenk.net",
 		Secure:   true,
 		MaxAge:   600,
 		HttpOnly: true,

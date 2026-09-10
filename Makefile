@@ -1,23 +1,17 @@
 #!make
-include .env
+include .env.local
 export $(shell sed 's/=.*//' .env)
 
 confirm:
 	@echo -n 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ]
 
-docker/build: ## build the image with the given VERSION (ex. VERSION=v1.1)
-	docker build --tag ghcr.io/filipovi/carbonite-admin:${VERSION} .
-
-docker/push: ## push the image with the given VERSION (ex. VERSION=v1.1)
-	docker push ghcr.io/filipovi/carbonite-admin:${VERSION}
-
 server/build: templ/generate ## Build the server
 	@echo 'Build the server...'
-	go build -buildvcs=false -o ./bin ./cmd/admin
+	go build -buildvcs=false -o ./bin ./cmd/client
 
 server/run: server/build ## Run the project
 	@echo 'Launch the server...'
-	./bin/admin
+	./bin/client
 
 server/audit: tidy fmt vet staticcheck test gosec ## audit
 
