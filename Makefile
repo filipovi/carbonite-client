@@ -42,7 +42,7 @@ gosec: ## Launch gosec
 
 templ/generate: ## generate the templates
 	@echo 'Generate the templates...'
-	templ generate
+	~/go/bin/templ generate
 
 env/test: ## Show the env variables
 	env
