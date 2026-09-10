@@ -1,6 +1,6 @@
 #!make
-include .env.local
-export $(shell sed 's/=.*//' .env)
+# include .env.local
+# export $(shell sed 's/=.*//' .env.local)
 
 confirm:
 	@echo -n 'Are you sure? [y/N] ' && read ans && [ $${ans:-N} = y ]
