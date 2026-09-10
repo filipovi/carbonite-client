@@ -1,8 +1,9 @@
 package main
 
 import (
-	"carbonite/admin/internal/data"
 	"net/http"
+
+	"carbonite/client/internal/data"
 
 	"github.com/labstack/echo/v4"
 )

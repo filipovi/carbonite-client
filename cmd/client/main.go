@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"sync"
 
-	"carbonite/admin/internal/api"
-	"carbonite/admin/internal/data"
-	"carbonite/admin/internal/handler"
-	"carbonite/admin/internal/redis"
+	"carbonite/client/internal/api"
+	"carbonite/client/internal/data"
+	"carbonite/client/internal/handler"
+	"carbonite/client/internal/redis"
 
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"

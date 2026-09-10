@@ -1,9 +1,10 @@
 package handler
 
 import (
-	"carbonite/admin/internal/data"
 	"fmt"
 	"net/http"
+
+	"carbonite/client/internal/data"
 
 	"github.com/a-h/templ"
 	"github.com/gorilla/sessions"
@@ -22,15 +23,10 @@ type (
 	Requester interface {
 		PostToken(string, string) (*data.TokenPayload, error)
 		PostRefreshToken(string) (*data.TokenPayload, error)
-
-		// Profiles
-		GetProfile(*data.TokenPayload, string) (*data.ProfilePayload, error)
-		GetProfiles(*data.TokenPayload) (*[]data.ProfilePayload, error)
-		PostProfileSearch(*data.SearchBody, *data.TokenPayload) (*[]data.ProfilePayload, error)
 	}
 )
 
-// This custom Render replaces Echo's echo.Context.Render() with templ's templ.Component.Render().
+// Render replaces Echo's echo.Context.Render() with templ's templ.Component.Render().
 func Render(c echo.Context, statusCode int, t templ.Component) error {
 	c.Response().Writer.WriteHeader(statusCode)
 	c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)

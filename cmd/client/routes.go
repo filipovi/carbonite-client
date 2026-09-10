@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"carbonite/admin/internal/handler"
+	"carbonite/client/internal/handler"
 
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"

@@ -1,4 +1,4 @@
-module carbonite/admin
+module carbonite/client
 
 go 1.25.0
 

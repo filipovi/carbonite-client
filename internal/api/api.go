@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"slices"
 
-	"carbonite/admin/internal/data"
+	"carbonite/client/internal/data"
 )
 
 type (

@@ -1,9 +1,10 @@
 package api
 
 import (
-	"carbonite/admin/internal/data"
 	"encoding/json"
 	"strings"
+
+	"carbonite/client/internal/data"
 )
 
 func (client Client) PostToken(email string, password string) (*data.TokenPayload, error) {

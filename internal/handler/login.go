@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"carbonite/admin/internal/data"
-	"carbonite/admin/internal/validator"
-	"carbonite/admin/templates/pages"
 	"net/http"
+
+	"carbonite/client/internal/data"
+	"carbonite/client/internal/validator"
+	"carbonite/client/templates/pages"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

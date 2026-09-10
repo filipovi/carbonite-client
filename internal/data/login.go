@@ -1,6 +1,6 @@
 package data
 
-import "carbonite/admin/internal/validator"
+import "carbonite/client/internal/validator"
 
 type (
 	LoginBody struct {

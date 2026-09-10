@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"carbonite/admin/templates/pages"
 	"net/http"
+
+	"carbonite/client/templates/pages"
 
 	"github.com/labstack/echo/v4"
 )
