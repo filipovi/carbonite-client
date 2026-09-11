@@ -17,7 +17,7 @@ type (
 
 func (h *HomeHandler) HandleHomepage(c echo.Context) error {
 	session, _ := h.Store.Get(c.Request(), h.SessionName)
-	_, logged := session.Values["login_id"].(string)
+	_, logged := session.Values["user_id"].(string)
 	if logged {
 		c.Redirect(http.StatusSeeOther, "/welcome")
 	}

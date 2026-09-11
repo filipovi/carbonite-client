@@ -22,7 +22,7 @@ type (
 
 func (h *LoginHandler) HandlePostLogin(c echo.Context) error {
 	session, _ := h.Store.Get(c.Request(), h.SessionName)
-	if _, ok := session.Values["login_id"].(string); ok {
+	if _, ok := session.Values["user_id"].(string); ok {
 		c.Redirect(http.StatusSeeOther, "/")
 	}
 
@@ -58,7 +58,7 @@ func (h *LoginHandler) HandlePostLogin(c echo.Context) error {
 		return return500(c, err)
 	}
 
-	session.Values["login_id"] = key
+	session.Values["user_id"] = key
 	if err = session.Save(c.Request(), c.Response()); err != nil {
 		return return500(c, err)
 	}
@@ -69,12 +69,12 @@ func (h *LoginHandler) HandlePostLogin(c echo.Context) error {
 func (h *LoginHandler) HandleGetLogout(c echo.Context) error {
 	var key string
 	session, _ := h.Store.Get(c.Request(), h.SessionName)
-	key, ok := session.Values["login_id"].(string)
+	key, ok := session.Values["user_id"].(string)
 	if !ok {
 		c.Redirect(http.StatusSeeOther, "/")
 		return nil
 	}
-	session.Values["login_id"] = nil
+	session.Values["user_id"] = nil
 	session.Options.MaxAge = -1
 
 	err := data.RemoveToken(h.Cacher, key)
@@ -92,7 +92,7 @@ func (h *LoginHandler) HandleGetLogout(c echo.Context) error {
 
 func (h *LoginHandler) HandleGetLogin(c echo.Context) error {
 	sess, _ := h.Store.Get(c.Request(), h.SessionName)
-	if _, ok := sess.Values["login_id"].(string); ok {
+	if _, ok := sess.Values["user_id"].(string); ok {
 		c.Redirect(http.StatusSeeOther, "/")
 	}
 	csrfToken := c.Get(middleware.DefaultCSRFConfig.ContextKey).(string)

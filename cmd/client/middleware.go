@@ -12,7 +12,7 @@ import (
 func (app *application) Auth(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		session, _ := app.store.Get(c.Request(), app.sessionName)
-		ID, ok := session.Values["login_id"].(string)
+		ID, ok := session.Values["user_id"].(string)
 		if !ok {
 			c.Logger().Warn("ID is not a string")
 			c.Redirect(http.StatusSeeOther, "/login")
